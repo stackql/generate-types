@@ -12,22 +12,33 @@ parsed JSON string).
 import { generateTypes } from "./mod.ts";
 
 async function main() {
-  const testObject = {
-    name: "fred",
-    age: 21,
-    fred: {
-      name: "fred",
-      age: 21,
+  const jsonString = `{
+    "external_urls": {
+        "spotify": "https://open.spotify.com/artist/4Z8W4fKeB5YxbusRsdQVPb"
     },
-    testarr1: [
-      {
-        testarrobj1: "testarrobj1",
-      },
+    "followers": {
+        "href": null,
+        "total": 7405000
+    },
+    "genres": [
+        "alternative rock",
+        "art rock",
+        "melancholia",
+        "oxford indie",
+        "permanent wave",
+        "rock"
     ],
-    testarr2: ["fred", "bob"],
-  };
-  const result = await generateTypes(testObject);
-  console.log(result);
+    "href": "https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb",
+    "id": "4Z8W4fKeB5YxbusRsdQVPb",
+    "name": "Radiohead",
+    "popularity": 79,
+    "type": "artist",
+    "uri": "spotify:artist:4Z8W4fKeB5YxbusRsdQVPb"
+  }`;
+  
+    const inputObject = JSON.parse(jsonString);
+    const result = await generateTypes(inputObject);
+    console.log(result);
 }
 
 main();
@@ -39,16 +50,24 @@ outputs...
 declare module namespace {
 
   export interface IRootObject {
+    IExternal_urls: object
+    IFollowers: object
+    genres: string[]
+    href: string
+    id: string
     name: string
-    age: number
-    IFred: object
-    testarr1: object[]
-    testarr2: string[]
+    popularity: number
+    type: string
+    uri: string
   }
 
-  export interface IFred {
-    name: string
-    age: number
+  export interface IExternal_urls {
+    spotify: string
+  }
+
+  export interface IFollowers {
+    href: any
+    total: number
   }
 
 }
@@ -57,6 +76,5 @@ declare module namespace {
 ## Test
 
 ```bash
-# unit tests
 deno test
 ```
