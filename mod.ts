@@ -12,21 +12,31 @@ function getAllTypes(
   let memberArr = [];
   for (let k in data) {
     let typeArr = [];
-    if (typeof data[k as keyof typeof data] === "object") {
-      if (Array.isArray(data[k as keyof typeof data])) {
-        // its an array, get the type of the first element
-        typeArr.push(k);
-        typeArr.push(`${typeof data[k as keyof typeof data][0]}[]`);
-      } else {
-        // its an object
-        typeArr.push(`I${convertToPascalCase(k)}`);
-        getAllTypes(data[k as keyof typeof data], `I${convertToPascalCase(k)}`, refs);
-        typeArr.push("object");
-      }
-    } else {
-      // its a primitive
+    // assign nulls to any
+    if (data[k as keyof typeof data] === null) {
       typeArr.push(k);
-      typeArr.push(typeof data[k as keyof typeof data]);
+      typeArr.push("any");
+    } else {
+      if (typeof data[k as keyof typeof data] === "object") {
+        if (Array.isArray(data[k as keyof typeof data])) {
+          // its an array, get the type of the first element
+          typeArr.push(k);
+          typeArr.push(`${typeof data[k as keyof typeof data][0]}[]`);
+        } else {
+          // its an object
+          typeArr.push(`I${convertToPascalCase(k)}`);
+          getAllTypes(
+            data[k as keyof typeof data],
+            `I${convertToPascalCase(k)}`,
+            refs,
+          );
+          typeArr.push("object");
+        }
+      } else {
+        // its a primitive
+        typeArr.push(k);
+        typeArr.push(typeof data[k as keyof typeof data]);
+      }
     }
     memberArr.push(typeArr);
     refs[objName] = memberArr;
