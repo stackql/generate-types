@@ -1,6 +1,7 @@
 # 🦕 generate-types
 
-Deno module to generate a TypeScript types module file from JSON data (or a parsed JSON string).
+Deno module to generate a TypeScript types module file from JSON data (or a
+parsed JSON string).
 
 ## Usage
 
@@ -8,28 +9,28 @@ Deno module to generate a TypeScript types module file from JSON data (or a pars
 import { generateTypes } from "./mod.ts";
 
 async function main() {
-    const testObject = {
-        name: 'fred',
-        age: 21,
-        fred: {
-            name: 'fred',
-            age: 21
-        },
-        testarr1: [
-            {
-                testarrobj1: 'testarrobj1'
-            },
-        ],
-        testarr2: [ 'fred', 'bob' ],
-    };
-    const result = await generateTypes(testObject);
-    console.log(result);
+  const testObject = {
+    name: "fred",
+    age: 21,
+    fred: {
+      name: "fred",
+      age: 21,
+    },
+    testarr1: [
+      {
+        testarrobj1: "testarrobj1",
+      },
+    ],
+    testarr2: ["fred", "bob"],
+  };
+  const result = await generateTypes(testObject);
+  console.log(result);
 }
 
 main();
 ```
 
-outputs...  
+outputs...
 
 ```
 declare module namespace {
@@ -56,4 +57,3 @@ declare module namespace {
 # unit tests
 deno test
 ```
-
