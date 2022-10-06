@@ -19,8 +19,8 @@ function getAllTypes(
         typeArr.push(`${typeof data[k as keyof typeof data][0]}[]`);
       } else {
         // its an object
-        typeArr.push(convertToPascalCase(k));
-        getAllTypes(data[k as keyof typeof data], convertToPascalCase(k), refs);
+        typeArr.push(`I${convertToPascalCase(k)}`);
+        getAllTypes(data[k as keyof typeof data], `I${convertToPascalCase(k)}`, refs);
         typeArr.push("object");
       }
     } else {
@@ -36,7 +36,7 @@ function getAllTypes(
 
 function generateDts(types: object) {
   let dtsOutput = "declare module namespace {\n\n";
-  dtsOutput += "  export interface RootObject {\n";
+  dtsOutput += "  export interface IRootObject {\n";
 
   // get fields for root object
   const rootFields: object = types["root" as keyof typeof types];

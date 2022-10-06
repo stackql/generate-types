@@ -37,15 +37,15 @@ outputs...
 ```
 declare module namespace {
 
-  export interface RootObject {
+  export interface IRootObject {
     name: string
     age: number
-    Fred: object
+    IFred: object
     testarr1: object[]
     testarr2: string[]
   }
 
-  export interface Fred {
+  export interface IFred {
     name: string
     age: number
   }
