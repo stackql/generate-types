@@ -1,5 +1,6 @@
 # 🦕 generate-types
 
+[![deno.land/x/dts](https://shield.deno.dev/x/dts)](https://deno.land/x/dts)
 ![workflow](https://github.com/stackql/generate-types/actions/workflows/deno.yml/badge.svg)
 
 Deno module to generate a TypeScript types module file from JSON data (or a
