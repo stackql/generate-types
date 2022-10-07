@@ -9,7 +9,7 @@ parsed JSON string).
 ## Usage
 
 ```typescript
-import { generateTypes } from "./mod.ts";
+import { generateTypes } from "https://deno.land/x/dts/mod.ts";
 
 async function main() {
   const jsonString = `{
